@@ -17,9 +17,15 @@ namespace Entities
         [Required]
         public int PartialQuantity { get; set; }
 
-
+        /// Relation with ProductEntity
         public string ProductId { get; set; }
         public ProductEntity Product { get; set; }
+
+        // Relaion With WareHouseEntity
+        public string WareHouseId { get; set; }
+        public WareHouseEntity WareHouse { get; set; }
+        // Relation With InputOutputEntity
+        public ICollection<InputOutputEntity> inputOutputs { get; set; }
 
     }
 }

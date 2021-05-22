@@ -22,9 +22,11 @@ namespace Entities
 
         public int TotalQuantity { get; set; }
         
+        //Relation with CategoryEntity
         public string CategoryId { set; get; }
         public CategoryEntity Category { get; set; }
 
+        //Relation with StorageEntity
         public ICollection<StorageEntity> Storages { get; set; }
     }
 }
