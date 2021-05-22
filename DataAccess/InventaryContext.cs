@@ -21,8 +21,31 @@ namespace DataAccess
         {
             if (!options.IsConfigured)
             {
-                options.UseSqlServer("Server=(Local);Database=nventoryDBTesting;User Id=TestingUserDb; Password=TestingUserDb1");
+                options.UseSqlServer("Server=(Local);Database=InventoryDBTesting;User Id=TestingUserDb; Password=TestingUserDb1");
             }
+        }
+
+        /// <summary>
+        /// Cargado de datos en la DB
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CategoryEntity>().HasData(
+                    new CategoryEntity { CategoryId = "ASH", CategoryName = "Aseo Hogar" },
+                    new CategoryEntity { CategoryId = "ASP", CategoryName = "Aseo Personal" },
+                    new CategoryEntity { CategoryId = "HGR", CategoryName = "Hogar" }             
+            );
+            modelBuilder.Entity<WareHouseEntity>().HasData(
+                    new WareHouseEntity {   WareHouseId= Guid.NewGuid().ToString(),
+                                            WareHouseName="Bodega Central",
+                                            WareHouseAddress="San Miguel"},
+                    new WareHouseEntity {   WareHouseId = Guid.NewGuid().ToString(), 
+                                            WareHouseName = "Bodega Auxiliar", 
+                                            WareHouseAddress = "San Luis" }
+            ) ;
+            
         }
     }
 }
