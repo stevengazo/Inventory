@@ -1,7 +1,23 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div>
+    <input type="text" @bind-value="@message1" />
+    <input type="text" @bind-value="@message2" />
+    <input type="button" value="Haga Clic Aqui" @onclick="ChangeText" />
+</div>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div>
+    @message1
+</div>
+
+
+@code{
+    string message1 = "Un contenido";
+    string message2 = string.Empty;
+
+    public void ChangeText()
+    {
+        message2 = message1;
+    }
+}
