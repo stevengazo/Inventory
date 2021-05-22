@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class StorageEntity
+    public class InputOutputEntity
     {
         [Key]
         [StringLength(50)]
-        public string StorageId { get; set; }
+        public string InputOutputId { get; set; }
         [Required]
-        public DateTime dateTime { get; set; }
+        public DateTime InOutDate { get; set; }
         [Required]
-        public int PartialQuantity { get; set; }
-
-
-        public string ProductId { get; set; }
-        public ProductEntity Product { get; set; }
-
+        public int Quantity { get; set; }
+        [Required]
+        public bool IsInput { get; set; }
     }
 }

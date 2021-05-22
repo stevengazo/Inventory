@@ -16,7 +16,7 @@ namespace Entities
         [Required]
         [StringLength(100)]
         public string WhereHouseName { get; set; }
-
+        [Required]
         [StringLength(600)]
         public string WhereHouseAddress { get; set; }
     }
