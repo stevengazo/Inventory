@@ -1,23 +1,5 @@
 ﻿@page "/"
 
-<div>
-    <input type="text" @bind-value="@message1" />
-    <input type="text" @bind-value="@message2" />
-    <input type="button" value="Haga Clic Aqui" @onclick="ChangeText" />
-</div>
-
-
-<div>
-    @message1
-</div>
-
-
-@code{
-    string message1 = "Un contenido";
-    string message2 = string.Empty;
-
-    public void ChangeText()
-    {
-        message2 = message1;
-    }
-}
+<Form001 Message="Un Saludo"/>
+<Form001 Message="Un texto diferente" />
+<Form001 Message="Otro Texto" />

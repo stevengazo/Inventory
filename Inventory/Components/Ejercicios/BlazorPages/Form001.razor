@@ -1,0 +1,30 @@
+﻿<div>
+    <input type="text" @bind-value="@message1" />
+    <input type="text" @bind-value="@message2" />
+    <input type="button" value="Haga Clic Aqui" @onclick="ChangeText" />
+</div>
+
+<div>
+    @message1
+</div>
+
+
+@code{
+    /// Parametro del componente
+    [Parameter]
+    public string Message { get; set; }
+
+    string message1 = "Un contenido";
+    string message2 = string.Empty;
+
+    protected  override async Task OnInitializedAsync()
+    {
+        message1 = Message;
+    }
+
+
+    public void ChangeText()
+    {
+        message2 = message1;
+    }
+}
