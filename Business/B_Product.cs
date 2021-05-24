@@ -10,6 +10,13 @@ namespace Business
 {
     public static class B_Product
     {
+        public static ProductEntity ProductById(string Id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Products.LastOrDefault(p => p.ProductId == Id);
+            }
+        }
         public static List<ProductEntity> ProductList()
         {
             using (var db = new InventaryContext())
