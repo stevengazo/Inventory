@@ -1,0 +1,18 @@
+﻿@page "/product/Update/{ProductId}"
+@using Entities;
+@using Business;
+
+
+<h2 class="card-title">Actualización de Productos</h2>
+
+<UpdateProductComponent Id="@ProductId.ToString()"/>
+
+
+@code{
+    [Parameter]
+    public string ProductId { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        ProductId = ProductId;
+    }
+}

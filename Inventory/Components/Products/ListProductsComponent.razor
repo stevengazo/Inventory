@@ -17,6 +17,7 @@
             <th>Referencia</th>
             <th>Nombre Producto</th>
             <th>Categoría</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
                 <td>@product.ProductId</td>
                 <td>@product.ProductName</td>
                 <td>@product.CategoryId</td>
+                <td><a href="product/Update/@product.ProductId">Actualizar</a></td>
             </tr>
         }
     </tbody>

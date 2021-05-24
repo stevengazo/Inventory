@@ -14,7 +14,7 @@ namespace Business
         {
             using (var db = new InventaryContext())
             {
-                return db.Products.LastOrDefault(p => p.ProductId == Id);
+                return db.Products.ToList().LastOrDefault(p => p.ProductId == Id);
             }
         }
         public static List<ProductEntity> ProductList()

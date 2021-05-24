@@ -1,5 +1,7 @@
 ﻿@using Entities;
 @using Business;
+
+<!--Inyección de dependencia de navegación-->
 @inject NavigationManager Nav
 
 
@@ -25,7 +27,7 @@
             }
         </InputSelect>
     </div>
-    <input type="button" value="Guardar Producto" @onclick="UpdateProduct" />
+    <input type="button" value="Actualizar Producto" @onclick="UpdateProduct" />
 
 </EditForm>
 
@@ -44,7 +46,7 @@
         oProduct = B_Product.ProductById(Id);
     }
 
-    private void UpdateProduct(ProductEntity oProduct)
+    private void UpdateProduct()
     {
         B_Product.UpdateProduct(oProduct);
         Nav.NavigateTo("product/list");
