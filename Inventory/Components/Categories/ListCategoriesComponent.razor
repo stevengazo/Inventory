@@ -1,0 +1,39 @@
+﻿@using Entities;
+@using Business;
+
+
+<div>
+    <table class="table table-light table-hover table-sm">
+        <thead>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td> Referencia </td>
+                <td> Nombre</td>
+                <td> </td>
+            </tr>
+        </tbody>
+        @foreach (var category in ListCategories)
+        {
+            <tr>
+                <td> @category.CategoryId</td>
+                <td> @category.CategoryName</td>
+                <td> <a href="category/update/@category.CategoryId"> Modificar</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
+@code {
+    List<CategoryEntity> ListCategories = new List<CategoryEntity>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListCategories = B_Category.CategoryList();
+    }
+
+}

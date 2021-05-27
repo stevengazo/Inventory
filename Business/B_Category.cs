@@ -10,6 +10,13 @@ namespace Business
     public static class B_Category
     {
         
+        public static CategoryEntity CategoryById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return  db.Categories.ToList().LastOrDefault(c => c.CategoryId == id);
+            }
+        }
         public static List<CategoryEntity> CategoryList()
         {
             using (var db= new InventaryContext())
