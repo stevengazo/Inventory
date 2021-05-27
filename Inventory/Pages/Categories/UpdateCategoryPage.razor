@@ -1,0 +1,28 @@
+﻿@page "/category/update/{CategoryId}"
+
+@using Entities;
+@using Business;
+
+<h2>
+    Actualización de Categoría
+</h2>
+
+<hr />
+    <a href="category/list"> Regresar a la lista de categorías</a>
+<hr />
+
+<UpdateCategoryComponent id="@CategoryId"/>
+
+@code{
+    [Parameter]
+    public string CategoryId { get; set; }
+
+    protected override  async Task OnInitializedAsync()
+    {
+        CategoryId = CategoryId;
+    }
+}
+
+
+
+  

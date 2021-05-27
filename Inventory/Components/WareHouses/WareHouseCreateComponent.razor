@@ -1,0 +1,34 @@
+﻿@using Entities;
+@using Business;
+
+@inject NavigationManager Nav
+
+
+<div>
+    <EditForm Model="@oWareHouse">
+        <div class="form-group">
+            <label>Referencia: </label>
+            <InputText @bind-Value="@oWareHouse.WareHouseId" class="form-control"></InputText>
+        </div>
+        <div class="form-group">
+            <label>Nombre: </label>
+            <InputText @bind-Value="@oWareHouse.WareHouseName" class="form-control"></InputText>
+        </div>
+        <div class="form-group">
+            <label>Dirección:</label>
+            <InputTextArea @bind-Value="@oWareHouse.WareHouseAddress" ></InputTextArea>
+        </div>
+    </EditForm>
+    <input type="button" value="Crear Almacén" @onclick="SaveWareHouse"/>
+</div>
+
+
+@code{
+    WareHouseEntity oWareHouse = new WareHouseEntity();
+
+    private void SaveWareHouse()
+    {
+        Nav.NavigateTo("warehouse/list");
+    }
+
+}

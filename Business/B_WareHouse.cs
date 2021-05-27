@@ -7,16 +7,16 @@ using Entities;
 using DataAccess;
 namespace Business
 {
-    public class B_WareHouse
+    public static class B_WareHouse
     {
-        public List<WareHouseEntity> WareHouseList()
+        public static List<WareHouseEntity> WareHouseList()
         {
             using (var db = new InventaryContext())
             {
                 return db.WareHouses.ToList();
             }
         }
-        public void CreateWareHouse(WareHouseEntity oWareHouse)
+        public  static void CreateWareHouse(WareHouseEntity oWareHouse)
         {
             using (var db = new InventaryContext())
             {
@@ -24,7 +24,7 @@ namespace Business
                 db.SaveChanges();
             }
         }
-        public void UpdateWareHouse(WareHouseEntity oWareHouse)
+        public static void  UpdateWareHouse(WareHouseEntity oWareHouse)
         {
             using (var db = new InventaryContext())
             {
