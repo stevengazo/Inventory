@@ -9,6 +9,14 @@ namespace Business
 {
     public static class B_WareHouse
     {
+
+        public static WareHouseEntity WareHouseById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.WareHouses.ToList().LastOrDefault(w => w.WareHouseId == id);
+            }
+        }
         public static List<WareHouseEntity> WareHouseList()
         {
             using (var db = new InventaryContext())

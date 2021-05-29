@@ -1,5 +1,21 @@
 ﻿@page "/warehouse/update/{id}"
+@using Entities;
+@using Business;
+ 
 
-@code {
+<h2>Actualizar Almacén</h2>
 
+<hr />
+    <a href="warehouse/list">Regresar lista de almacenes </a>
+<hr />
+<WareHouseUpdateComponent id="@id" />
+
+@code{
+    [Parameter]
+    public string id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        id = id;
+    }
 }

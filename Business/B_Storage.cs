@@ -8,10 +8,10 @@ using DataAccess;
 
 namespace Business
 {
-    public class B_Storage
+    public static class B_Storage
     {
         
-        public List<StorageEntity> StorageList()
+        public static List<StorageEntity> StorageList()
         {
             using (var db = new InventaryContext())
             {
@@ -19,7 +19,7 @@ namespace Business
 
             }
         }
-        public void CreateStore(StorageEntity oStorage)
+        public static void CreateStore(StorageEntity oStorage)
         {
             using (var db = new InventaryContext())
             {
@@ -27,13 +27,23 @@ namespace Business
                 db.SaveChanges();
             }
         }
-        public void UpdateStore(StorageEntity oStorage)
+        public static void UpdateStore(StorageEntity oStorage)
         {
             using (var db = new InventaryContext())
             {
                 db.Storages.Update(oStorage);
                 db.SaveChanges();
             }
+        }
+
+        public static bool IsProductInWareHouse(string IdStorage)
+        {
+            using(var db = new InventaryContext())
+            {
+                var product = db.Storages.ToList().Where(s => s.StorageId == IdStorage);
+                var aux = product.Any();
+                return aux;
+            }           
         }
     }
 }

@@ -11,12 +11,12 @@
             <InputText @bind-Value="@oWareHouse.WareHouseId" class="form-control"></InputText>
         </div>
         <div class="form-group">
-            <label>Nombre: </label>
+            <label>Nombre: </label>            
             <InputText @bind-Value="@oWareHouse.WareHouseName" class="form-control"></InputText>
         </div>
         <div class="form-group">
             <label>Dirección:</label>
-            <InputTextArea @bind-Value="@oWareHouse.WareHouseAddress" ></InputTextArea>
+            <InputTextArea @bind-Value="@oWareHouse.WareHouseAddress" class="form-control" ></InputTextArea>
         </div>
     </EditForm>
     <input type="button" value="Crear Almacén" @onclick="SaveWareHouse"/>
