@@ -1,1 +1,66 @@
-﻿
+﻿@using Entities;
+@using Business;
+
+<div class="form-group">
+    <label> Bodega: </label>
+    <select class="form-control" @onchange="OnChangeWareHouse">
+        <option value="">Seleccione una bodega...</option>
+        @foreach (var item in wareHouses)
+        {
+            <option value="@item.WareHouseId">@item.WareHouseName</option>
+        }
+    </select>
+</div>
+<hr />
+<div>
+    <EditForm Model="oInOut">
+        <label>Producto:</label>
+        <div class="form-group">
+            <InputSelect @bind-Value="@oInOut.StorageId" Class="form-control">
+                <option value="">Seleccione un producto...</option>
+                @foreach (var obj in Storages)
+                {
+                    <option value="@obj.StorageId">@obj.Product.ProductName</option>
+                }
+            </InputSelect>
+        </div>        
+        <div class="form-group">
+            <label>Cantidad: </label>
+            <InputNumber class="form-control" @bind-Value="@oInOut.Quantity"></InputNumber>
+        </div>
+        <div class="form-group">
+            <label>¿Entrada?</label>
+            <InputCheckbox class="form-control" @bind-Value="@oInOut.IsInput"></InputCheckbox>
+        </div>
+    </EditForm>
+    <input type="button"  class="form-control" value="@buttonValue" @onclick="SaveInOut"/>
+</div>
+
+
+
+@code{
+    InputOutputEntity oInOut = new InputOutputEntity();
+
+    List<WareHouseEntity> wareHouses = new List<WareHouseEntity>();
+    List<StorageEntity> Storages = new List<StorageEntity>();
+
+    string buttonValue => oInOut.IsInput ? "Registrar Entrada" : "Registrar salida";
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        wareHouses = B_WareHouse.WareHouseList();
+    }
+
+    private void OnChangeWareHouse(ChangeEventArgs e)
+    {
+        var idWareHouse = e.Value.ToString();
+        Storages = B_Storage.StorageProductsByWareHouse(idWareHouse);
+    }
+
+    private void SaveInOut()
+    {
+        B_InOut.CreateInOut(oInOut);
+    }
+} 

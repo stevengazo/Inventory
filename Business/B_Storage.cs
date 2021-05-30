@@ -4,13 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using DataAccess;
 
 namespace Business
 {
     public static class B_Storage
     {
-        
+
+        public static List<StorageEntity> StorageProductsByWareHouse(string idWareHouse)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Storages
+                    .Include(s=>s.Product)
+                    .Include(s=>s.WareHouse)
+                    .Where(s => s.WareHouseId == idWareHouse)
+                    .ToList();
+            }
+        }
         public static List<StorageEntity> StorageList()
         {
             using (var db = new InventaryContext())

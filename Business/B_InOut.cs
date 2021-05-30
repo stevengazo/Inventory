@@ -7,10 +7,10 @@ using Entities;
 using DataAccess;
 namespace Business
 {
-    public class B_InOut
+    public static class B_InOut
     {
        
-        public List<InputOutputEntity> InOutList()
+        public static List<InputOutputEntity> InOutList()
         {
             using( var db = new InventaryContext())
             {
@@ -18,7 +18,7 @@ namespace Business
             }
         }
 
-        public void CreateInOut (InputOutputEntity oInOut)
+        public static void CreateInOut (InputOutputEntity oInOut)
         {
             using (var db = new InventaryContext())
             {
@@ -27,7 +27,7 @@ namespace Business
             }
         }
 
-        public void Update (InputOutputEntity oInOut)
+        public static void Update (InputOutputEntity oInOut)
         {
             using (var db = new InventaryContext())
             {
