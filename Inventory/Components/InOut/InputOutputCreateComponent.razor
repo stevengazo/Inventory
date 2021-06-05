@@ -1,5 +1,6 @@
 ﻿@using Entities;
 @using Business;
+@inject NavigationManager Nav;
 
 <div class="form-group">
     <label> Bodega: </label>
@@ -23,7 +24,7 @@
                     <option value="@obj.StorageId">@obj.Product.ProductName</option>
                 }
             </InputSelect>
-        </div>        
+        </div>
         <div class="form-group">
             <label>Cantidad: </label>
             <InputNumber class="form-control" @bind-Value="@oInOut.Quantity"></InputNumber>
@@ -33,7 +34,10 @@
             <InputCheckbox class="form-control" @bind-Value="@oInOut.IsInput"></InputCheckbox>
         </div>
     </EditForm>
-    <input type="button"  class="form-control" value="@buttonValue" @onclick="SaveInOut"/>
+    <input type="button" class="form-control" value="@buttonValue" @onclick="SaveInOut" />
+</div>
+<div class="text-center h4" >
+    @messsage
 </div>
 
 
@@ -43,10 +47,10 @@
 
     List<WareHouseEntity> wareHouses = new List<WareHouseEntity>();
     List<StorageEntity> Storages = new List<StorageEntity>();
-
+    ProductEntity oProduct = new ProductEntity();
+    StorageEntity oStorage = new StorageEntity();
+    string messsage;
     string buttonValue => oInOut.IsInput ? "Registrar Entrada" : "Registrar salida";
-
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -61,6 +65,38 @@
 
     private void SaveInOut()
     {
-        B_InOut.CreateInOut(oInOut);
+        oStorage = Storages.LastOrDefault(s => s.StorageId == oInOut.StorageId);
+        oProduct = oStorage.Product;
+        if (oInOut.IsInput)
+        {
+            oStorage.PartialQuantity = oStorage.PartialQuantity + oInOut.Quantity;
+            B_Storage.UpdateStore(oStorage);
+            oProduct.TotalQuantity = oProduct.TotalQuantity + oInOut.Quantity;
+            B_Product.UpdateProduct(oProduct);
+            messsage = $"El producto {oProduct.ProductName}, ha sido actualizado";
+        }
+        else
+        {
+            if (IsBiggerThanZero(oInOut.Quantity, oStorage.PartialQuantity))
+            {
+                oStorage.PartialQuantity = oStorage.PartialQuantity - oInOut.Quantity;
+                B_Storage.UpdateStore(oStorage);
+                oProduct.TotalQuantity = oProduct.TotalQuantity - oInOut.Quantity;
+                B_Product.UpdateProduct(oProduct);
+                messsage = $"El producto {oProduct.ProductName}, ha sido actualizado";
+            }
+            else
+            {
+                messsage = $"No existe la cantidad suficiente en bodega de {oProduct.ProductName}";
+            }
+        }
+    }
+    private bool IsBiggerThanZero(int quantity,int storageQuantity)
+    {
+        if (storageQuantity>quantity)
+        {
+            return true;
+        }
+        return false;
     }
 } 
